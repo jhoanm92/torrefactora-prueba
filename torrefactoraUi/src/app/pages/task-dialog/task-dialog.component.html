@@ -1,0 +1,65 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{text}}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput placeholder="ID" readonly="true" formControlName="id">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option *ngFor="let item of priorities" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let item of statusList" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Begin Date</mat-label>
+        <input matInput [matDatepicker]="pickerBeginDate" formControlName="beginDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerBeginDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBeginDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="pickerEndDate" [min]="beginDate.value" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEndDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Description" formControlName="description">
+      </mat-form-field>
+      <br>
+      <br>
+
+    </form>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" valid (click)="operate()">OK</button>
+  </mat-card-actions>
+</mat-card>

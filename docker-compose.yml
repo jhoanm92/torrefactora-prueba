@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: java_app
+    image: backend
+    build:  
+      context: ./torrefactora
+    ports:
+      - 8080:8080
+
+  frontend:
+    container_name: angular_app
+    image: frontend
+    build:  
+      context: ./torrefactoraUi
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
